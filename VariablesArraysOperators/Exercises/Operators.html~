@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Operators</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	var rockStars = [];
+	var counts = [];
+	rockStars[0] = prompt("Who is your favorite rock star?", "");
+	counts[rockStars[0]] = prompt("How many of their albums do you have?", "");
+	/*
+	Ask the user how many of this rockstar's albums she owns and store
+	the result in a variable.
+	*/
+	rockStars[1] = prompt("And your next favorite rock star?", "");
+	counts[rockStars[1]]= prompt("How many of their albums do you have?", "");
+	/*
+	Ask the user how many of this rockstar's albums she owns and store
+	the result in a variable.
+	*/
+</script>
+</head>
+<body>
+<script type="text/javascript">
+	var msg = (counts[rockStars[0]] > counts[rockStars[1]]) ? ("You have " + (counts[rockStars[0]] - counts[rockStars[1])] more albums for rockStars[0]) : "You have " + (counts[rockStars[1]] - counts[rockStars[0]]) "more albums for" + rockStars[1]);
+	alert(msg);
+</script>	
+
+<script type="text/javascript">
+	var diff = counts[rockStars[0]] - counts[rockStars[1]];
+	document.write("You have " + diff + " more albums for " + rockStars[0]);
+</script>	
+<!--
+	Let the user know how many more of her favorite rockstar's albums
+	she has than of her second favorite rockstar's albums.
+-->
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Slide Show</title>
+<script type="text/javascript">
+
+var imagePaths = [];
+imagePaths[0] = "Images/Banner.jpg";
+imagePaths[1] = "Images/Hulk.jpg";
+imagePaths[2] = "Images/Bruce.jpg";
+imagePaths[3] = "Images/Batman.jpg";
+
+var imageCache = [];
+
+
+for (var i=0; i<imagePaths.length; i++) {
+	var s = imagePaths[i]
+	imageCache[i] = new Image();
+	imageCache[i].src = s;
+	imageCache[i].name = s.substring(s.lastIndexOf("/")+1, s.lastIndexOf("."));
+}
+
+var curSlide = 0;
+function changeSlide(dir){
+	curSlide += dir;
+	if (curSlide < 0) {
+		curSlide = imageCache.length - 1;
+	} else if (curSlide >= imageCache.length) {
+		curSlide = 0;
+	}
+	document.Slide.src = imagePaths[curSlide];
+	document.forms[0].imageSelector.selectedIndex=curSlide;
+}
+
+function goToSlide(slide){
+	document.Slide.src = imagePaths[slide];
+	curSlide = slide;
+}
+</script>
+</head>
+<body>
+<div style="text-align:center;">
+<h1>Slide Show</h1>
+<img name="Slide" src="Images/Banner.jpg">
+<form>
+<input type="button" onclick="changeSlide(-1);" value="Previous">
+<input type="button" onclick="changeSlide(1);" value="Next"><br>
+<select name="imageSelector" onchange="goToSlide(this.selectedIndex);">
+<script type="text/javascript">
+for (var i=0; i<imageCache.length; i++) {
+	document.write("<option value='" + i + "'>"
+					 + imageCache[i].name + "</option>");
+}
+</script>
+</select>
+</form>
+</div>
+</body>
+</html>

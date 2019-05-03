@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Month As String</title>
+<script type="text/javascript">
+	function monthAsString(num){
+		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		return months[num-1];
+	}
+
+	function dayAsString(num){
+		var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		return days[num-1];
+	}
+	
+	function enterMonth(){
+		var userMonth = prompt("What month were you born?", "");
+		alert("You were born in " + monthAsString(userMonth) + ".");
+	}
+
+	function getCurrentMonth(){
+		var today = new Date();
+		alert(monthAsString(today.getMonth()+1));
+	}
+	
+	function enterDay(){
+		var userDay = prompt("What day of the week is it?", "");
+		alert("Today is " + dayAsString(userDay) + ".");
+	}
+
+	function getCurrentDay(){
+		var today = new Date();
+		alert(dayAsString(today.getDay()+1));
+	}
+</script>
+</head>
+<body>
+<form>
+	<input type="button" value="CHOOSE MONTH" onclick="enterMonth();">
+	<input type="button" value="GET CURRENT MONTH" onclick="getCurrentMonth();"><br>
+	<input type="button" value="CHOOSE DAY" onclick="enterDay();">
+	<input type="button" value="GET CURRENT DAY" onclick="getCurrentDay();">
+</form>
+</body>
+</html>

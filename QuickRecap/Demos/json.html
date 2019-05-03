@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON</title>
+<style type="text/css">
+#output {
+	font-family:monospace;
+	background-color:#eee;
+	font-size:larger;
+}
+</style>
+<script type="text/javascript">
+function showBoss(badgeNo) {
+	var ajax = new XMLHttpRequest();
+	var employees;
+	ajax.open("GET", "json.txt", true);
+	ajax.onreadystatechange = function() {
+		if ( this.readyState > 2 && typeof employees == "undefined" ) {
+			document.getElementById("output").innerHTML = this.responseText;
+			employees = JSON.parse(this.responseText);
+			alert(employees[employees[badgeNo].reportsTo].name);
+		}
+	}
+	ajax.send();
+}
+</script>
+</head>
+<body>
+<button onclick="showBoss(35739)">Show Homer's Boss</button>
+<pre id="output"></pre>
+</body>
+</html>

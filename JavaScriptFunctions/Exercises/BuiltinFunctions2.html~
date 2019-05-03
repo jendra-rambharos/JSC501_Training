@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Built-in Functions</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	var userName, userNum1, userNum2, numsSubtracted;
+	userName = window.prompt("What's your name?","");
+	userNum1 = window.prompt("How old were you when you first used a computer?", "");
+	alert("You chose " + userNum1);
+	userNum2 = window.prompt("How old are you now?", "");
+	alert("You chose " + userNum2);
+	var firstAnswer[] = split(userNum1," ");
+	alert("Age is " + firstAnswer[0]);
+	var firstAnswer[] = split(userNum1," ");
+	alert("Age is " + firstAnswer[1]);
+	numsSubtracted = parseInt(firstAnswer1) - parseInt(firstAnswer2);
+</script>
+</head>
+<body>
+<p>
+	<script type="text/javascript">
+		document.write(firstAnswer[1] + " - " + firstAnswer[0] + " = ");
+		document.write(numsSubtracted + "<br/>");
+	</script>
+</p>
+</body>
+</html>

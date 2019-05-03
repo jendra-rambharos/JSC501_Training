@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date Object</title>
+</head>
+<body>
+<h1>Current Date/Time</h1>
+<script type="text/javascript">
+	var timer;
+	function getTime(){
+		timer = setInterval(function(){
+		var currDate = new Date();
+		clockText = currDate;},100);
+	}
+</script>
+
+<button onclick="getTime()">Start Clock</button>
+<input type="text" id="clockText" name="clockText" size="2"><br>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<script src="FormValidation.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+	Create the validate() function here.
+*/
+
+function checkLength(text, min, max){
+	min = min || 1;
+	max = max || 10000;
+
+	if (text.length < min || text.length > max) {
+		return false;
+	}
+	return true;
+}
+
+function compareValues(val1, val2){
+	if (val1 == val2) {
+		return 0;
+	}else if(val1 > val2){
+		return -1;
+	}else if(val2 > val1){
+		return 1;
+	}	
+}
+
+function checkEmail(email){
+	if ((email.length < 6) || (email.indexOf("@") == -1) || (email.indexOf(".") == -1)){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function validate(form){
+
+	var firstName = form.FirstName.value;
+	var lastName = form.LastName.value;
+	var city = form.City.value;
+	var country = form.Country.value;
+	var username = form.Username.value;
+	var password = form.Password.value; 
+	var middleInit = form.MidInit.value; 
+	var state = form.State.value; 
+	var email = form.Email.value; 
+	var password2 = form.Password2.value;
+
+	var errors = [];
+	
+	if (compareValues(firstName.length,0) == 0){
+		errors[errors.length] = "You must enter a First Name";
+	} 
+	
+	if (compareValues(lastName.length,0) == 0){
+		errors[errors.length] = "You must enter a Last Name";
+	} 
+	
+	if (compareValues(city.length,0) == 0){
+		errors[errors.length] = "You must enter a City";
+	} 
+	
+	if (compareValues(country.length,0) == 0){
+		errors[errors.length] = "You must enter a Country";
+	} 
+	
+	if (compareValues(userName.length,0) == 0){
+		errors[errors.length] = "You must enter a UserName";
+	} 
+	
+	if (compareValues(password1.length,0) == 0){
+		errors[errors.length] = "You must enter a Password";
+	} 
+	
+	if (compareValues(middleInit.length,1) != 0){
+		errors[errors.length] = "You must enter a Middle Initial";
+	}
+	
+	if (compareValues(state.length,2) != 0){
+		errors[errors.length] = "You must enter a state with two characters";
+	}
+	
+	if (password1 != password2){
+		errors[errors.length] = "Password 1 and 2 do not match";
+	}
+	
+	if (errors.length > 0) {
+		reportErrors(errors);	
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function reportErrors(errors){
+	var msg = "There were some issues with your form:\n";
+	
+	for (var i = 0; i<errors.length; i++) {
+		numError = i+1;
+		msg += "\n" + numError + ". " + errors[i];
+	}
+	
+	alert(msg);
+		
+}
+
+</script>
+</head>
+<body>
+<h1>Registration Form</h1>
+<form method="post" action="Process.html"
+			onsubmit="return validate(this);">
+	<table border="0" cellspacing="2" cellpadding="2">
+      <tr>
+        <td>First Name:</td>
+        <td><input type="text" name="FirstName" size="20"></td>
+      </tr>
+      <tr>
+        <td>Middle Initial:</td>
+        <td><input type="text" name="MidInit" size="2"></td>
+      </tr>
+      <tr>
+        <td> Last Name:</td>
+        <td><input type="text" name="LastName" size="20"></td>
+      </tr>
+      <tr>
+        <td>City: </td>
+        <td><input type="text" name="City" size="20"></td>
+      </tr>
+      <tr>
+        <td>State: </td>
+        <td><input type="text" name="State" size="2"></td>
+      </tr>
+      <tr>
+        <td>Country:</td>
+        <td><input type="text" name="Country" size="20"></td>
+      </tr>
+      <tr>
+        <td>Zip: </td>
+        <td><input type="text" name="Zip" size="10"></td>
+      </tr>
+      <tr>
+        <td>Email: </td>
+        <td><input type="text" name="Email" size="30"></td>
+      </tr>
+      <tr>
+        <td>Username:</td>
+        <td><input type="text" name="Username" size="10"></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" name="Password1" size="10"></td>
+      </tr>
+      <tr>
+        <td>Repeat Password: </td>
+        <td><input type="password" name="Password2" size="10"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+			<input name="submit" type="submit" value="Submit">
+			<input name="reset" type="reset" value="Reset Form">
+		</td>
+      </tr>
+    </table>
+</form>
+</body>
+</html>

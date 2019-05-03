@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<head>
+<title>Pong</title>
+<link href="pong.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../lib.js"></script>
+<script type="text/javascript">
+	var pong, racket, wall, court, btnStart;
+	var pongTop, pongLeft, pongBottom, pongRight;
+	var racketTop, racketLeft, racketRight, racketBottom, racketWidth, racketOffset;
+	var wallTop, wallLeft, wallRight;
+	var gameStarted;
+	var timer;
+	var vMove, hMove, hMoveNum;
+	var delay, score;
+	
+	function init(){
+		pong = document.getElementById("divPong");
+		racket = document.getElementById("divRacket");
+		wall = document.getElementById("divWall");
+		court = document.getElementById("divCourt");
+		btnStart = document.getElementById("divStart");
+		pongTop = 1;
+		pongLeft = 150;
+		racketTop = 330;
+		racketLeft = 100;
+		racketWidth = 150;
+		racketOffset = racketLeft;
+		wallTop = 0;
+		wallLeft = 0;
+		wallRight = 800;
+		vMove = 4;
+		hMoveNum = 1;
+		hMove = 0;
+		score = 0;
+		delay = 20;
+		document.getElementById("spanScore").innerHTML = score;
+		btnStart.style.zIndex = "30";
+		gameStarted = false;
+		observeEvent(btnStart,"click",startGame);
+	}
+	
+	function startGame(){
+		observeEvent(document,"mousemove",dragRacket);
+		gameStarted = true;
+		pong.style.top = pongTop + "px";
+		pong.style.left = pongLeft + "px";
+		pongBottom = pongTop+10;
+		pongRight = pongLeft+10;
+		
+		racket.style.top = racketTop + "px";
+		racket.style.left = racketLeft + "px";
+		racket.style.width = racketWidth + "px";
+		racketRight = racketLeft + 150;
+		racketBottom = racketTop + 20;
+		btnStart.style.zIndex = "10";
+		
+		timer = setInterval(movePong, delay);
+	}
+	
+	function movePong(){
+		pongTop = parseInt(pong.style.top);
+		pongTop += vMove;
+		pong.style.top = pongTop + "px";
+		pongLeft = parseInt(pong.style.left);
+		pongLeft += hMove;
+		pong.style.left = pongLeft + "px";
+		pongBottom = pongTop+10;
+		pongRight = pongLeft+10;
+		trackRacket();
+		
+		if (pongLeft <= wallLeft || pongRight >= wallRight) {
+			hMove *= -1;
+		}	
+		
+		if (pongBottom >= racketTop && pongRight >= racketLeft && 
+				pongLeft <= racketRight-.67*racketWidth) {
+			vMove *= -1;
+			hMove = -hMoveNum;
+		} else if (pongBottom >= racketTop && pongRight >= racketLeft && 
+				pongLeft <= racketRight-.33*racketWidth) {
+			vMove*=-1;
+			hMove=0;
+		} else if (pongBottom >= racketTop &&  pongRight >= racketLeft && 
+					pongLeft <= racketRight) {
+			vMove *= -1;
+			hMove = hMoveNum;
+		} else if (pongTop > racketBottom) {
+			endGame();
+		}
+		
+		if (pongTop <= wallTop) {
+			vMove = Math.abs(vMove) + 1;
+			hMoveNum = hMoveNum + 1;
+			score++;
+			document.getElementById("spanScore").innerHTML = score;
+		}
+	}
+	
+	function endGame(){
+		unObserveEvent(document,"mousemove",dragRacket);
+		clearInterval(timer);
+		alert("Game Over");
+		init();
+	}
+	
+	function trackRacket(){
+		racketTop = parseInt(racket.style.top)+10;
+		racketLeft = parseInt(racket.style.left);
+		racketWidth = parseInt(racket.style.width);
+		racketRight = racketLeft + racketWidth;
+		racketBottom = racketTop + 20;
+	}
+	
+	function dragRacket(e){
+		if (window.event) {
+			e = event; //for IE
+		}
+	
+		if (gameStarted) {
+			racket.style.left = (e.clientX - racketOffset) + "px";
+		}
+	}
+
+	observeEvent(window,"load",init);
+</script>
+</head>
+<body>
+	<div id="divCourt">
+		<div id="divWall"></div>
+		<div id="divPong"><!--IE6 needs a comment here or it won't allow the height of the div to be set smaller than the default height--></div>
+		<div id="divRacket"></div>
+	</div>
+	<button id="divStart">START</button>
+	<div id="divScore">Score: <span id="spanScore">0</span></div>
+</body>
+</html>

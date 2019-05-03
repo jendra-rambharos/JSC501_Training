@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Special Characters in Strings</title>
+<script type="text/javascript">
+	var chars = ['\n','\t','\'',"\"",'\\','\r'];
+</script>
+<style type="text/css">
+	span {
+		background-color:yellow;
+	}
+	body {
+		font-size:xx-large;	
+	}
+	pre {
+		border: 1px solid blue; 
+	}
+</style>
+</head>
+<body>
+<pre>
+<script type="text/javascript">
+for (var i in chars) {
+	document.write("<span>");
+	document.write(chars[i]);
+	document.write("</span>, ");
+}
+</script>
+</pre>
+</body>
+</html>
